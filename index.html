@@ -329,5 +329,37 @@
         </p>
       </section>
     </article>
+    <section>
+      <form id="feedbackForm" class="comment-form" method="post">
+        <label for="name">Ваше ім'я:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Введіть ваше ім'я"
+          required
+        />
+
+        <label for="comment">Ваш коментар:</label>
+        <textarea
+          id="comment"
+          name="comment"
+          rows="4"
+          placeholder="Введіть ваш відгук"
+          maxlength="500"
+          required
+        ></textarea>
+        <!-- <div class="g-recaptcha" data-sitekey="your_site_key"></div> -->
+
+        <button type="submit">Надіслати</button>
+      </form>
+    </section>
+    <section>
+      <ul id="comments">
+        <!-- Тут будуть відображатися коментарі -->
+      </ul>
+    </section>
+    <script src="script.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>
