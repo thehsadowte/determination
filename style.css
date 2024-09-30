@@ -20,15 +20,16 @@ li {
 .container {
   margin-left: 80px;
   margin-right: 80px;
+  @media screen and (max-width: 650px) {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
 }
-
-.title {
-  text-indent: 60px;
-  padding-left: 100px;
+.author-article {
   text-align: center;
-  /* font-size: 28px; */
+  font-size: 18px;
+  font-style: italic;
 }
-
 .text-center {
   text-align: center;
 }
@@ -86,14 +87,14 @@ li {
 }
 
 /* Стиль для самого списку коментарів */
-#comments {
+#commentsSection {
   list-style-type: none; /* Відключити маркери списку */
   padding: 0;
   margin: 20px 0;
 }
 
 /* Стиль для кожного коментаря */
-#comments li {
+#commentsSection li {
   padding: 10px;
   border-bottom: 1px solid #ccc; /* Лінія під кожним коментарем */
   margin-bottom: 10px;
@@ -118,4 +119,24 @@ li {
   margin-top: 15px;
   font-size: 1em;
   color: #555;
+}
+
+.title {
+  text-align: center;
+
+  @media screen and (min-width: 1280px) {
+    text-indent: 60px;
+    padding-left: 100px;
+    text-align: center;
+    /* font-size: 28px; */
+  }
+}
+
+img {
+  @media screen and (max-width: 700px) {
+    max-width: 450px !important;
+  }
+  @media screen and (max-width: 470px) {
+    max-width: 320px !important;
+  }
 }
