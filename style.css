@@ -1,0 +1,41 @@
+.container {
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.title {
+  text-indent: 80px;
+  padding-left: 100px;
+  text-align: center;
+  /* font-size: 28px; */
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  text-indent: 60px;
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.last-section {
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.header {
+  margin-bottom: 50px;
+}
+/* 
+.text-indent {
+  text-indent: 60px;
+} */
