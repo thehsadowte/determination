@@ -86,35 +86,30 @@ li {
   background-color: #45a049;
 }
 
-/* Стиль для самого списку коментарів */
 #commentsSection {
-  list-style-type: none; /* Відключити маркери списку */
+  list-style-type: none;
   padding: 0;
   margin: 20px 0;
 }
 
-/* Стиль для кожного коментаря */
 #commentsSection li {
   padding: 10px;
-  border-bottom: 1px solid #ccc; /* Лінія під кожним коментарем */
+  border-bottom: 1px solid #ccc;
   margin-bottom: 10px;
 }
 
-/* Стиль для імені коментатора */
 .comment-author {
   font-weight: bold;
   font-size: 1.1em;
   color: #333;
 }
 
-/* Стиль для часу додавання коментаря */
 .comment-time {
   font-size: 0.9em;
   color: #777;
   margin-left: 10px;
 }
 
-/* Стиль для тексту коментаря */
 .comment-text {
   margin-top: 15px;
   font-size: 1em;

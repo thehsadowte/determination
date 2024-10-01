@@ -1,61 +1,54 @@
 const express = require("express");
-const cors = require("cors"); // Додаємо цей рядок
-const fs = require("fs");
-const path = require("path");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
 
-// Налаштування CORS
-app.use(cors()); // Додаємо цей рядок
+const uri =
+  "mongodb+srv://shadowte:WREsQhGehNvxgIz8@cluster0.xk279.mongodb.net/";
 
-// Middleware для обробки JSON-даних
+mongoose
+  .connect(uri)
+  .then(() => console.log("Підключено до MongoDB Atlas"))
+  .catch((error) =>
+    console.error("Помилка підключення до MongoDB Atlas:", error)
+  );
+
+const commentSchema = new mongoose.Schema({
+  name: String,
+  comment: String,
+  time: String,
+});
+
+const Comment = mongoose.model("Comment", commentSchema);
+
+app.use(cors());
 app.use(bodyParser.json());
 
-// Віддаємо статичні файли (наприклад, HTML, CSS, JS)
-app.use(express.static(path.join(__dirname)));
-
-// Маршрут для отримання всіх коментарів
-app.get("/comments", (req, res) => {
-  fs.readFile("comments.json", "utf8", (err, data) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ message: "Помилка при зчитуванні коментарів" });
-    }
-    res.json(JSON.parse(data));
-  });
-});
-
-// Маршрут для додавання нового коментаря
 app.post("/comments", (req, res) => {
-  const newComment = req.body;
-
-  // Зчитуємо існуючі коментарі
-  fs.readFile("comments.json", "utf8", (err, data) => {
-    if (err) {
-      return res
+  const newComment = new Comment(req.body);
+  newComment
+    .save()
+    .then(() => res.status(201).json({ message: "Коментар успішно доданий!" }))
+    .catch((error) =>
+      res
         .status(500)
-        .json({ message: "Помилка при зчитуванні коментарів" });
-    }
-
-    const comments = JSON.parse(data);
-    comments.push(newComment);
-
-    // Записуємо оновлені коментарі у файл
-    fs.writeFile("comments.json", JSON.stringify(comments), (err) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ message: "Помилка при збереженні коментаря" });
-      }
-      res.status(201).json({ message: "Коментар успішно доданий!" });
-    });
-  });
+        .json({ message: "Помилка при збереженні коментаря", error })
+    );
 });
 
-// Запускаємо сервер
+app.get("/comments", (req, res) => {
+  Comment.find() //
+    .then((comments) => res.json(comments)) //
+    .catch((error) =>
+      res
+        .status(500)
+        .json({ message: "Помилка при завантаженні коментарів", error })
+    );
+});
+
 app.listen(PORT, () => {
   console.log(`Сервер працює на http://localhost:${PORT}`);
 });
