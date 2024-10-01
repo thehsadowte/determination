@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+app.use(express.static("public")); // або 'path/to/your/static/files'
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 // Отримання URI зі змінних середовища
 const uri = process.env.MONGODB_URI;
