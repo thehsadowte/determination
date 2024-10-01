@@ -6,16 +6,22 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const MONGODB_URI =
-  "mongodb+srv://shadowte:WREsQhGehNvxgIz8@cluster0.xk279.mongodb.net/";
+// Отримання URI зі змінних середовища
 const uri = process.env.MONGODB_URI;
 
-mongoose
+// Перевірка наявності URI
+if (!uri) {
+  console.error("Помилка: MONGODB_URI не визначена");
+  process.exit(1); // Припиняємо виконання програми, якщо змінна не визначена
+}
 
-  .connect(process.env.uri)
+// Підключення до MongoDB
+mongoose
+  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Підключено до MongoDB"))
   .catch((error) => console.error("Помилка підключення до MongoDB:", error));
 
+// Схема і модель коментарів
 const commentSchema = new mongoose.Schema({
   name: String,
   comment: String,
@@ -27,6 +33,7 @@ const Comment = mongoose.model("Comment", commentSchema);
 app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
 
+// Створення коментарів
 app.post("/comments", (req, res) => {
   const newComment = new Comment(req.body);
   newComment
@@ -39,6 +46,7 @@ app.post("/comments", (req, res) => {
     );
 });
 
+// Отримання коментарів
 app.get("/comments", (req, res) => {
   Comment.find() //
     .then((comments) => res.json(comments)) //
@@ -49,6 +57,7 @@ app.get("/comments", (req, res) => {
     );
 });
 
+// Запуск сервера
 app.listen(PORT, () => {
   console.log(`Сервер працює на http://localhost:${PORT}`);
 });
