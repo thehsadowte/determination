@@ -6,15 +6,15 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const uri =
+const MONGODB_URI =
   "mongodb+srv://shadowte:WREsQhGehNvxgIz8@cluster0.xk279.mongodb.net/";
+const uri = process.env.MONGODB_URI;
 
 mongoose
-  .connect(uri)
-  .then(() => console.log("Підключено до MongoDB Atlas"))
-  .catch((error) =>
-    console.error("Помилка підключення до MongoDB Atlas:", error)
-  );
+
+  .connect(process.env.uri)
+  .then(() => console.log("Підключено до MongoDB"))
+  .catch((error) => console.error("Помилка підключення до MongoDB:", error));
 
 const commentSchema = new mongoose.Schema({
   name: String,
@@ -24,7 +24,7 @@ const commentSchema = new mongoose.Schema({
 
 const Comment = mongoose.model("Comment", commentSchema);
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
 
 app.post("/comments", (req, res) => {
