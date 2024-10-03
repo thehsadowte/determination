@@ -9,9 +9,11 @@ app.use(express.static("public")); // або 'path/to/your/static/files'
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
+MONGODB_URI =
+  "mongodb+srv://shadowte:WREsQhGehNvxgIz8@cluster0.xk279.mongodb.net/";
 
 // Отримання URI зі змінних середовища
-const uri = process.env.MONGODB_URI;
+const uri = MONGODB_URI;
 
 // Перевірка наявності URI
 if (!uri) {
