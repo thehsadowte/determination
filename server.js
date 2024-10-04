@@ -5,25 +5,25 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const PORT = process.env.PORT || 3000 || 80;
-app.use(express.static("public")); // або 'path/to/your/static/files'
+
+// Маршрут для відправки index.html
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  res.sendFile(__dirname + "/index.html"); // змінений шлях
 });
-MONGODB_URI =
+
+// MongoDB URI
+const MONGODB_URI =
   "mongodb+srv://shadowte:WREsQhGehNvxgIz8@cluster0.xk279.mongodb.net/";
 
-// Отримання URI зі змінних середовища
-const uri = MONGODB_URI;
-
 // Перевірка наявності URI
-if (!uri) {
+if (!MONGODB_URI) {
   console.error("Помилка: MONGODB_URI не визначена");
-  process.exit(1); // Припиняємо виконання програми, якщо змінна не визначена
+  process.exit(1);
 }
 
 // Підключення до MongoDB
 mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Підключено до MongoDB"))
   .catch((error) => console.error("Помилка підключення до MongoDB:", error));
 
@@ -54,8 +54,8 @@ app.post("/comments", (req, res) => {
 
 // Отримання коментарів
 app.get("/comments", (req, res) => {
-  Comment.find() //
-    .then((comments) => res.json(comments)) //
+  Comment.find()
+    .then((comments) => res.json(comments))
     .catch((error) =>
       res
         .status(500)
