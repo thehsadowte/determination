@@ -72,8 +72,8 @@ document
       time: time,
     };
 
-    // fetch("http://localhost:3001/comments", {
-    fetch("https://physics-e8ff.onrender.com/comments", {
+    fetch("http://localhost:3001/comments", {
+      // fetch("https://physics-e8ff.onrender.com/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
