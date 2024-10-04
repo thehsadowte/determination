@@ -13,8 +13,8 @@ function displayComments(comments) {
 }
 
 function loadComments() {
-  fetch("https://physics-e8ff.onrender.com/comments")
-    // fetch("http://localhost:3001/comments")
+  // fetch("https://physics-e8ff.onrender.com/comments")
+  fetch("http://localhost:3001/comments")
     .then((response) => response.json())
     .then((data) => {
       displayComments(data); //
