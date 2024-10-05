@@ -23,7 +23,7 @@ if (!uri) {
 
 // Підключення до MongoDB
 mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(uri)
   .then(() => console.log("Підключено до MongoDB"))
   .catch((error) => console.error("Помилка підключення до MongoDB:", error));
 
